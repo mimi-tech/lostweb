@@ -1,6 +1,6 @@
 # lostweb
 
-A new Flutter project.
+A Grassroots reference implementation
 
 ## Getting Started
 
