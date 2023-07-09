@@ -1,29 +1,24 @@
-import 'dart:convert';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-// ignore: depend_on_referenced_packages
-import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
-import 'package:flutter_chat_ui/flutter_chat_ui.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:lostweb/posts.dart';
 
-// For the testing purposes, you should probably use https://pub.dev/packages/uuid.
-String randomString() {
-  final random = Random.secure();
-  final values = List<int>.generate(16, (i) => random.nextInt(255));
-  return base64UrlEncode(values);
-}
+void main() => runApp(const LostWebApp());
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class LostWebApp extends StatelessWidget {
+  const LostWebApp({super.key});
 
   @override
-  Widget build(BuildContext context) => const MaterialApp(
-        home: MyHomePage(),
-      );
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Twitter',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      home: const MyHomePage(),
+    );
+  }
 }
 
 class MyHomePage extends StatefulWidget {
@@ -34,35 +29,67 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<types.Message> _messages = [];
-  final _user = const types.User(id: '82091008-a484-4a89-ae75-a22bf8d6f3ac');
-
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          title: const Text('Lost Web'),
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 1,
+        backgroundColor: Colors.white,
+        leading: Container(
+          margin: const EdgeInsets.all(10.0),
+          child: const CircleAvatar(
+            backgroundImage: AssetImage('0.jpg'),
+          ),
         ),
-        body: Chat(
-          messages: _messages,
-          onSendPressed: _handleSendPressed,
-          user: _user,
+        title: const Text(
+          'Home',
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
         ),
-      );
-
-  void _addMessage(types.Message message) {
-    setState(() {
-      _messages.insert(0, message);
-    });
+      ),
+      body: listOfTweets(),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(FontAwesomeIcons.pen),
+        onPressed: () {},
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            buildBottomIconButton(Icons.home, Colors.blue),
+            buildBottomIconButton(Icons.search, Colors.black45),
+            buildBottomIconButton(Icons.notifications, Colors.black45),
+            buildBottomIconButton(Icons.mail_outline, Colors.black45),
+          ],
+        ),
+      ),
+    );
   }
 
-  void _handleSendPressed(types.PartialText message) {
-    final textMessage = types.TextMessage(
-      author: _user,
-      createdAt: DateTime.now().millisecondsSinceEpoch,
-      id: randomString(),
-      text: message.text,
+  Widget buildBottomIconButton(IconData icon, Color color) {
+    return IconButton(
+      icon: Icon(
+        icon,
+        color: color,
+      ),
+      onPressed: () {},
     );
+  }
 
-    _addMessage(textMessage);
+  Widget listOfTweets() {
+    return Container(
+      color: Colors.white,
+      child: ListView.separated(
+        itemBuilder: (BuildContext context, int index) {
+          return posts[index];
+        },
+        separatorBuilder: (BuildContext context, int index) => const Divider(
+          height: 0,
+        ),
+        itemCount: posts.length,
+      ),
+    );
   }
 }
