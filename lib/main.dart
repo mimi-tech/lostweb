@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lostweb/posts.dart';
 
-void main() => runApp(const LostWebApp());
+import 'view/signup_view.dart';
+
+void main() => runApp(const ProviderScope(child: LostWebApp()));
 
 class LostWebApp extends StatelessWidget {
   const LostWebApp({super.key});
@@ -16,7 +19,7 @@ class LostWebApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const MyHomePage(),
+      home: const SignupView(),
     );
   }
 }
