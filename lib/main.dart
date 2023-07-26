@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lostweb/posts.dart';
 
+import 'view/new_post.dart';
 import 'view/signup_view.dart';
 
 void main() => runApp(const ProviderScope(child: LostWebApp()));
@@ -21,6 +22,12 @@ final GoRouter _router = GoRouter(
           path: 'home',
           builder: (BuildContext context, GoRouterState state) {
             return const MyHomePage();
+          },
+        ),
+        GoRoute(
+          path: 'say',
+          builder: (BuildContext context, GoRouterState state) {
+            return const NewPost();
           },
         ),
       ],
@@ -98,7 +105,9 @@ class _MyHomePageState extends State<MyHomePage> {
         icon,
         color: color,
       ),
-      onPressed: () {},
+      onPressed: () {
+        context.go('/say');
+      },
     );
   }
 
