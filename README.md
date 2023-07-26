@@ -2,15 +2,17 @@
 
 A Grassroots reference implementation
 
-## Getting Started
+## The lay of the land with Firebase
+- [Install Firebase for Web](https://firebase.google.com/docs/flutter/setup?platform=web)
+- [Install Firebase hosting](https://docs.flutter.dev/deployment/web)
+- [Local Development with Flutter and Firebase Codelab](https://firebase.google.com/codelabs/get-started-firebase-emulators-and-flutter#0)
+- [Firebase Emulator setup and configuration](https://firebase.google.com/docs/emulator-suite/install_and_configure)
 
-This project is a starting point for a Flutter application.
+## Setup Firebase Emulators
+1. `firebase init emulators`
+2. `firebase emulators:start`
+3. `firebase emulators:start --only hosting`
 
-A few resources to get you started if this is your first Flutter project:
+# Firebase Security
+[Is it safe to expose Firebase apiKey to the public?](https://stackoverflow.com/questions/37482366/is-it-safe-to-expose-firebase-apikey-to-the-public)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.

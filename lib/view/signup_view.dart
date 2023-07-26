@@ -5,7 +5,7 @@ import 'package:lottie/lottie.dart';
 
 import '../constants.dart';
 
-final showPassProvider = StateProvider<bool>((ref) => false);
+final showPassProvider = StateProvider<bool>((ref) => true);
 
 class SignupView extends ConsumerStatefulWidget {
   const SignupView({Key? key}) : super(key: key);
@@ -57,12 +57,14 @@ class _SignupViewState extends ConsumerState<SignupView> {
         Expanded(
           flex: 4,
           child: RotatedBox(
-            quarterTurns: 3,
+            quarterTurns: 4,
             child: Lottie.asset(
-              'assets/coin.json',
-              height: size.height * 0.3,
+              'assets/rocket.json',
+              height: size.height * 0.8,
               width: double.infinity,
               fit: BoxFit.fill,
+              repeat: true,
+              animate: true,
             ),
           ),
         ),
@@ -131,7 +133,7 @@ class _SignupViewState extends ConsumerState<SignupView> {
                   style: kTextFormFieldStyle(),
                   decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.person),
-                    hintText: 'Username or Gmail',
+                    hintText: 'Your User Name',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(15)),
                     ),
